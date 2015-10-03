@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on jeremp</title>
-    <link>http://localhost:1313/post/</link>
-    <description>Recent content in Posts on jeremp</description>
+    <title>Posts on Your site title</title>
+    <link>https://jeremp.github.io/post/</link>
+    <description>Recent content in Posts on Your site title</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
+    <language>fr</language>
+    <copyright>&amp;copy; Copyright notice</copyright>
     <lastBuildDate>Sat, 03 Oct 2015 09:37:24 +0200</lastBuildDate>
-    <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://jeremp.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>first</title>
-      <link>http://localhost:1313/post/first/</link>
+      <link>https://jeremp.github.io/post/first/</link>
       <pubDate>Sat, 03 Oct 2015 09:37:24 +0200</pubDate>
       
-      <guid>http://localhost:1313/post/first/</guid>
+      <guid>https://jeremp.github.io/post/first/</guid>
       <description>&lt;p&gt;hellow&lt;/p&gt;
 </description>
     </item>
