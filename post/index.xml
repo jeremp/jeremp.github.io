@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Your site title</title>
+    <title>Posts on Jeremy Passeron</title>
     <link>https://jeremp.github.io/post/</link>
-    <description>Recent content in Posts on Your site title</description>
+    <description>Recent content in Posts on Jeremy Passeron</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
     <copyright>&amp;copy; Copyright notice</copyright>
-    <lastBuildDate>Sat, 03 Oct 2015 09:37:24 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 03 Oct 2015 13:32:06 +0200</lastBuildDate>
     <atom:link href="https://jeremp.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
-      <title>first</title>
-      <link>https://jeremp.github.io/post/first/</link>
-      <pubDate>Sat, 03 Oct 2015 09:37:24 +0200</pubDate>
+      <title>Personnaliser la page de login d’OpenAM</title>
+      <link>https://jeremp.github.io/post/personnaliser-la-page-de-login-dopenam/</link>
+      <pubDate>Sat, 03 Oct 2015 13:32:06 +0200</pubDate>
       
-      <guid>https://jeremp.github.io/post/first/</guid>
-      <description>&lt;p&gt;hellow&lt;/p&gt;
+      <guid>https://jeremp.github.io/post/personnaliser-la-page-de-login-dopenam/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;../../img/openam_logo.png&#34; alt=&#34;Logo d&#39;OpenAm&#34; title=&#34;Logo d&#39;OpenAm&#34; /&gt;
+&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://forgerock.org/openam/&#34;&gt;OpenAm&lt;/a&gt; est un véritable couteau suisse du SSO, à première vue son côté “usine à gaz” peut en rebuter certains (qui lui préféreront sans doute CAS) mais je vous invite à effectuer le tutoriel &lt;a href=&#34;http://docs.forgerock.org/en/openam/12.0.0/getting-started/index/index.html#getting-started&#34;&gt;Getting Started With OpenAM&lt;/a&gt; pour vous faire un avis. Le système extensible d’authentication module d’OpenAM vous permettra d’adapter la mécanique d’authentification si le mode username + password n’est pas suffisant.
+Le seul point de difficulté que j’ai personnellement rencontré est la personnalisation de la page de login. Depuis la version 12.0.0, OpenAM propose un système appelé XUI (basé sur des templates javascript et le framework CSS “Less”) qui me paraît plutôt compliqué à prendre en main. Concrètement, si votre projet nécessite un mode d’authentification “exotique” comme par exemple :&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;un premier écran avec un nom d’utilisateur et un password&lt;/li&gt;
+&lt;li&gt;un second écran avec un second password ou code à saisir&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Le système d’authentication module vous permettra de décrire et d’implémenter cette logique d’authentification, en revanche vous serez assez limité en ce qui concerne la personnalisation de la partie présentation de vos écrans d’identification sans parler des modes de saisies que vous auriez peut être envie de modifier comme par exemple les claviers virtuels (à la mode sur les sites bancaires) où l’on saisie son code à la souris.&lt;/p&gt;
+
+&lt;p&gt;Heureusement OpenAM expose ses services d’authentifications (et d’autres) au travers de &lt;a href=&#34;https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles&#34;&gt;web services REST&lt;/a&gt;,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl \
+ --request POST \
+ --header &amp;quot;X-OpenAM-Username: demo&amp;quot; \
+ --header &amp;quot;X-OpenAM-Password: changeit&amp;quot; \
+ --header &amp;quot;Content-Type: application/json&amp;quot; \
+ --data &amp;quot;{}&amp;quot; \
+ https://openam.example.com:8443/openam/json/authenticate
+{ &amp;quot;tokenId&amp;quot;: &amp;quot;AQIC5w...NTcy*&amp;quot;, &amp;quot;successUrl&amp;quot;: &amp;quot;/openam/console&amp;quot; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur &lt;em&gt;openam.mycompany.com&lt;/em&gt; il suffit de modifier votre hosts :&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;127.0.0.1    localhost mypc.mycompany.com
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ainsi votre application locale tournera sur le même domaine (&lt;em&gt;mycompany.com&lt;/em&gt;) que votre SSO et le partage du cookie sera possible.&lt;/p&gt;
 </description>
     </item>
     

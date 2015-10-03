@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tomcat on Jeremy Passeron</title>
+    <link>http://localhost:1313/tags/tomcat/</link>
+    <description>Recent content in Tomcat on Jeremy Passeron</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr</language>
+    <copyright>&amp;copy; Copyright notice</copyright>
+    <lastBuildDate>Sat, 03 Oct 2015 14:02:33 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/tomcat/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Tracer la durée de traitement des requêtes avec Tomcat</title>
+      <link>http://localhost:1313/post/dureeRequeteTomcat/</link>
+      <pubDate>Sat, 03 Oct 2015 14:02:33 +0200</pubDate>
+      
+      <guid>http://localhost:1313/post/dureeRequeteTomcat/</guid>
+      <description>&lt;p&gt;Ça y est votre API REST est en place, vous avez rédigé une belle documentation et même mis en place un client swagger pour aider vos clients à l&amp;rsquo;utiliser.&lt;/p&gt;
+
+&lt;p&gt;Puis arrive le temps des premiers retours d&amp;rsquo;utilisation de vos clients, certains trouvent que votre API met trop de temps à répondre sur telle ou telle requête.&lt;/p&gt;
+
+&lt;p&gt;En général c&amp;rsquo;est à ce moment là qu&amp;rsquo;on commence à mettre en place un système pour logguer la durée de traitement de vos requêtes. En général vous utiliserez la notion de Filter ou d&amp;rsquo;Interceptor (si vous utilisez Spring MVC) ou tenterez d&amp;rsquo;utiliser des outils plus avancés tels que JavaMelody (il faut vraiment que j&amp;rsquo;essaye ce truc d&amp;rsquo;ailleurs).&lt;/p&gt;
+
+&lt;p&gt;En fait il y a beaucoup plus simple, il suffit de demander cela non pas à votre application mais à votre conteneur de servlets. Il existe déjà dans les fichiers de log de Tomcat les localhost_acces_XXX.log qui tracent chaque requête (la méthode HTTP, l&amp;rsquo;URL demandée, le code retour etc&amp;hellip;).&lt;/p&gt;
+
+&lt;p&gt;Le format de ces logs se configure dans le server.xml, par défaut la &amp;ldquo;Valve&amp;rdquo; utilisée est AccessLogValve qui permet de tracer tout un tas d&amp;rsquo;informations mais pas le temps que Tomcat a pris pour fournir une réponse à la requête, pour cela il vous faut utiliser l&amp;rsquo;Extended Access Log Valve et faire apparaître dans le pattern de log le &amp;ldquo;time-taken&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;Ci dessous un exemple de server.xml&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
