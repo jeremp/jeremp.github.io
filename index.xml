@@ -6,7 +6,6 @@
     <description>Recent content on Jeremy Passeron</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>fr</language>
-    <copyright>&amp;copy; Copyright notice</copyright>
     <lastBuildDate>Sat, 03 Oct 2015 13:32:06 +0200</lastBuildDate>
     <atom:link href="https://jeremp.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -29,7 +28,7 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
 
 &lt;p&gt;Le système d’authentication module vous permettra de décrire et d’implémenter cette logique d’authentification, en revanche vous serez assez limité en ce qui concerne la personnalisation de la partie présentation de vos écrans d’identification sans parler des modes de saisies que vous auriez peut être envie de modifier comme par exemple les claviers virtuels (à la mode sur les sites bancaires) où l’on saisie son code à la souris.&lt;/p&gt;
 
-&lt;p&gt;Heureusement OpenAM expose ses services d’authentifications (et d’autres) au travers de &lt;a href=&#34;https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles&#34;&gt;web services REST&lt;/a&gt;,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :&lt;/p&gt;
+&lt;p&gt;Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de &lt;a href=&#34;https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles&#34;&gt;web services REST&lt;/a&gt;,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;curl \
  --request POST \
@@ -56,7 +55,24 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
       <pubDate>Sat, 03 Oct 2015 09:37:12 +0200</pubDate>
       
       <guid>https://jeremp.github.io/about/</guid>
-      <description>&lt;p&gt;this is the about page&lt;/p&gt;
+      <description>
+
+&lt;h1 id=&#34;jeremy-passeron:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;Jeremy Passeron&lt;/h1&gt;
+
+&lt;h2 id=&#34;senior-java-developer-iot-aka-internet-of-things-connected-health:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;Senior Java Developer, Iot (aka Internet Of Things), Connected-Health&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;resume.pdf&#34;&gt;Download PDF&lt;/a&gt; (comming soon&amp;hellip;)
+[jpasseron AT gmail DOT-COM]&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;profile:6083a88ee3411b0d17ce02d738f69d47&#34;&gt;Profile&lt;/h3&gt;
+
+&lt;p&gt;&amp;hellip;comming soon&amp;hellip;&lt;/p&gt;
+
+&lt;hr /&gt;
 </description>
     </item>
     
