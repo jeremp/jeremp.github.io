@@ -28,9 +28,9 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
 
 &lt;p&gt;Le système d’authentication module vous permettra de décrire et d’implémenter cette logique d’authentification, en revanche vous serez assez limité en ce qui concerne la personnalisation de la partie présentation de vos écrans d’identification sans parler des modes de saisies que vous auriez peut être envie de modifier comme par exemple les claviers virtuels (à la mode sur les sites bancaires) où l’on saisie son code à la souris.&lt;/p&gt;
 
-&lt;p&gt;Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de &lt;a href=&#34;https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles&#34;&gt;web services REST&lt;/a&gt;,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl \
+&lt;p&gt;Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de &lt;a href=&#34;https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles&#34;&gt;web services REST&lt;/a&gt;,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :
+&lt;code&gt;
+curl \
  --request POST \
  --header &amp;quot;X-OpenAM-Username: demo&amp;quot; \
  --header &amp;quot;X-OpenAM-Password: changeit&amp;quot; \
@@ -38,14 +38,13 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
  --data &amp;quot;{}&amp;quot; \
  https://openam.example.com:8443/openam/json/authenticate
 { &amp;quot;tokenId&amp;quot;: &amp;quot;AQIC5w...NTcy*&amp;quot;, &amp;quot;successUrl&amp;quot;: &amp;quot;/openam/console&amp;quot; }
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur &lt;em&gt;openam.mycompany.com&lt;/em&gt; il suffit de modifier votre hosts :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;127.0.0.1    localhost mypc.mycompany.com
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Ainsi votre application locale tournera sur le même domaine (&lt;em&gt;mycompany.com&lt;/em&gt;) que votre SSO et le partage du cookie sera possible.&lt;/p&gt;
+&lt;p&gt;Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur &lt;em&gt;openam.mycompany.com&lt;/em&gt; il suffit de modifier votre hosts :
+&lt;code&gt;
+127.0.0.1    localhost mypc.mycompany.com
+&lt;/code&gt;
+Ainsi votre application locale tournera sur le même domaine (&lt;em&gt;mycompany.com&lt;/em&gt;) que votre SSO et le partage du cookie sera possible.&lt;/p&gt;
 </description>
     </item>
     

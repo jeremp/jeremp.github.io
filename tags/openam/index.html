@@ -49,12 +49,12 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://twitter.com/dragos_plesca"><i class="fa fa-twitter"></i> Twitter</a>
+                    <a class="pure-button" href="https://twitter.com/jeremp"><i class="fa fa-twitter"></i> Twitter</a>
                 </li>
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://github.com/dplesca "><i class="fa fa-github-alt"></i> github</a>
+                    <a class="pure-button" href="https://github.com/jeremp "><i class="fa fa-github-alt"></i> github</a>
                 </li>
                 
                 <li class="nav-item">
@@ -101,9 +101,9 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
 
 <p>Le système d’authentication module vous permettra de décrire et d’implémenter cette logique d’authentification, en revanche vous serez assez limité en ce qui concerne la personnalisation de la partie présentation de vos écrans d’identification sans parler des modes de saisies que vous auriez peut être envie de modifier comme par exemple les claviers virtuels (à la mode sur les sites bancaires) où l’on saisie son code à la souris.</p>
 
-<p>Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de <a href="https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles">web services REST</a>,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :</p>
-
-<pre><code>curl \
+<p>Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de <a href="https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles">web services REST</a>,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :
+<code>
+curl \
  --request POST \
  --header &quot;X-OpenAM-Username: demo&quot; \
  --header &quot;X-OpenAM-Password: changeit&quot; \
@@ -111,14 +111,13 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
  --data &quot;{}&quot; \
  https://openam.example.com:8443/openam/json/authenticate
 { &quot;tokenId&quot;: &quot;AQIC5w...NTcy*&quot;, &quot;successUrl&quot;: &quot;/openam/console&quot; }
-</code></pre>
+</code></p>
 
-<p>Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur <em>openam.mycompany.com</em> il suffit de modifier votre hosts :</p>
-
-<pre><code>127.0.0.1    localhost mypc.mycompany.com
-</code></pre>
-
-<p>Ainsi votre application locale tournera sur le même domaine (<em>mycompany.com</em>) que votre SSO et le partage du cookie sera possible.</p>
+<p>Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur <em>openam.mycompany.com</em> il suffit de modifier votre hosts :
+<code>
+127.0.0.1    localhost mypc.mycompany.com
+</code>
+Ainsi votre application locale tournera sur le même domaine (<em>mycompany.com</em>) que votre SSO et le partage du cookie sera possible.</p>
 
                     </div>
                 </section>
