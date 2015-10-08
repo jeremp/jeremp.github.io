@@ -49,12 +49,12 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://twitter.com/jeremp"><i class="fa fa-twitter"></i> Twitter</a>
+                    <a class="pure-button" href="https://twitter.com/dragos_plesca"><i class="fa fa-twitter"></i> Twitter</a>
                 </li>
                 
                 
                 <li class="nav-item">
-                    <a class="pure-button" href="https://github.com/jeremp "><i class="fa fa-github-alt"></i> github</a>
+                    <a class="pure-button" href="https://github.com/dplesca "><i class="fa fa-github-alt"></i> github</a>
                 </li>
                 
                 <li class="nav-item">
@@ -70,6 +70,43 @@
         <div>
             
             <div class="posts">
+                
+                <h1 class="content-subhead">08 Oct 2015, 19:00</h1>
+                <section class="post">
+                    <header class="post-header">
+
+                        <a href="https://jeremp.github.io/post/dureeRequeteTomcat/" class="post-title">Tracer la durée de traitement des requêtes avec Tomcat</a>
+
+                        <p class="post-meta">
+                            
+                            
+                                under 
+                                
+                                <a class="post-category post-category-Development" href="https://jeremp.github.io//categories/development">Development</a>
+                            
+                        </p>
+                    </header>
+
+                    <div class="post-description">
+                        <p>Ça y est votre API REST est en place, vous avez rédigé une belle documentation et même mis en place un client <a href="http://swagger.io/">swagger</a> pour aider vos clients à l&rsquo;utiliser.</p>
+
+<p>Puis arrive le temps des premiers retours d&rsquo;utilisation de vos clients, certains trouvent que votre API met trop de temps à répondre sur telle ou telle requête.</p>
+
+<p>En général c&rsquo;est à ce moment là qu&rsquo;on commence à mettre en place un système pour logguer la durée de traitement de vos requêtes. En général vous utiliserez la notion de Filter ou d&rsquo;Interceptor (si vous utilisez Spring MVC) ou tenterez d&rsquo;utiliser des outils plus avancés tels que JavaMelody (il faut vraiment que j&rsquo;essaye ce truc d&rsquo;ailleurs).</p>
+
+<p>En fait il y a beaucoup plus simple, il suffit de demander cela non pas à votre application mais à votre conteneur de servlets (ici Tomcat). Il existe déjà dans les fichiers de log de Tomcat les localhost_acces_XXX.log qui tracent chaque requête (la méthode HTTP, l&rsquo;URL demandée, le code retour etc&hellip;).</p>
+
+<p>Le format de ces logs se configure dans le server.xml, par défaut la &ldquo;Valve&rdquo; utilisée est AccessLogValve qui permet de tracer tout un tas d&rsquo;informations mais pas le temps que Tomcat a pris pour fournir une réponse à la requête, pour cela il vous faut utiliser l&rsquo;<a href="https://tomcat.apache.org/tomcat-7.0-doc/config/valve.html#Extended_Access_Log_Valve">Extended Access Log Valve</a> et faire apparaître dans le pattern de log le &ldquo;time-taken&rdquo;.</p>
+
+<p>Ci dessous un exemple de server.xml :</p>
+
+<pre><code class="language-xml">&lt;Valve className=&quot;org.apache.catalina.valves.ExtendedAccessLogValve&quot; directory=&quot;logs&quot;
+  prefix=&quot;localhost_access_log.&quot; suffix=&quot;.txt&quot;
+  pattern=&quot;date c-ip cs-method cs-uri cs-uri-query sc-status time-taken&quot; /&gt;
+</code></pre>
+
+                    </div>
+                </section>
                 
                 <h1 class="content-subhead">03 Oct 2015, 13:32</h1>
                 <section class="post">
@@ -101,9 +138,9 @@ Le seul point de difficulté que j’ai personnellement rencontré est la person
 
 <p>Le système d’authentication module vous permettra de décrire et d’implémenter cette logique d’authentification, en revanche vous serez assez limité en ce qui concerne la personnalisation de la partie présentation de vos écrans d’identification sans parler des modes de saisies que vous auriez peut être envie de modifier comme par exemple les claviers virtuels (à la mode sur les sites bancaires) où l’on saisie son code à la souris.</p>
 
-<p>Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de <a href="https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles">web services REST</a>,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :
-<code>
-curl \
+<p>Heureusement OpenAM expose ses services d’authentification (et d’autres) au travers de <a href="https://backstage.forgerock.com/#!/docs/openam/12.0.0/dev-guide/chap-rest]. Il vous suffit dès lors de réaliser dans votre application les pages d’authentification (aussi complexes soient-elles">web services REST</a>,et d’appeler avec les données saisies par votre utilisateur le web service d’authentification. Ci dessous l’exemple avec la commande cUrl fourni dans la doc  :</p>
+
+<pre><code>curl \
  --request POST \
  --header &quot;X-OpenAM-Username: demo&quot; \
  --header &quot;X-OpenAM-Password: changeit&quot; \
@@ -111,13 +148,14 @@ curl \
  --data &quot;{}&quot; \
  https://openam.example.com:8443/openam/json/authenticate
 { &quot;tokenId&quot;: &quot;AQIC5w...NTcy*&quot;, &quot;successUrl&quot;: &quot;/openam/console&quot; }
-</code></p>
+</code></pre>
 
-<p>Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur <em>openam.mycompany.com</em> il suffit de modifier votre hosts :
-<code>
-127.0.0.1    localhost mypc.mycompany.com
-</code>
-Ainsi votre application locale tournera sur le même domaine (<em>mycompany.com</em>) que votre SSO et le partage du cookie sera possible.</p>
+<p>Si les identifiants sont valides, le service retourne le fameux jeton d’identification qu’il vous suffit d’attacher en tant que cookie à la session de votre utilisateur. Ceci nécessitera bien sûr que votre instance d’OpenAM tourne sur le même domaine que vos applicatifs (si ce n’est pas le cas sur l’environnement de développement, pensez à faire une correspondance dans votre fichier Host de manière à ce que cela soit le cas) : Si votre OpenAM tourne sur <em>openam.mycompany.com</em> il suffit de modifier votre hosts :</p>
+
+<pre><code>127.0.0.1    localhost mypc.mycompany.com
+</code></pre>
+
+<p>Ainsi votre application locale tournera sur le même domaine (<em>mycompany.com</em>) que votre SSO et le partage du cookie sera possible.</p>
 
                     </div>
                 </section>
